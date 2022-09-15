@@ -1,0 +1,149 @@
+.App {
+  text-align: center;
+}
+
+* {
+ font-size: 16px;
+}
+
+nav > span {
+  padding: 0 10px;
+}
+
+nav a {
+  color: rgb(9, 101, 39);
+  text-decoration: none;
+  margin: 0 2rem;
+  padding: 0 .15rem
+}
+
+nav a.active {
+  color:  rgb(9, 101, 39);
+  border-bottom: 4px solid  rgb(9, 101, 39);
+}
+
+nav a:hover,
+nav a:active,
+nav a.active {
+  color:  rgb(90, 128, 103);
+  border-bottom: 4px solid rgb(90, 128, 103);
+  font-weight: bold;
+}
+
+header {
+  font-size: 60px;
+  padding: 50px 0;
+  margin: 20px 0;
+  background-image: url("./images/debugging1.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: dimgrey;
+  color: black;
+  text-shadow: 2px 2px white;
+  opacity: .85;
+}
+
+
+.mainpage {
+  margin-top: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  align-self: center;
+  height: 40px;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px rgb(61, 94, 80);
+}
+
+.buglist {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  margin: auto;
+}
+
+.buglist h2 {
+  align-self: center;
+}
+
+.bug_card {
+}
+
+.bug_checkbox {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.initial_cap {
+  text-transform: capitalize;
+}
+
+button {
+  width: 100px;
+  height: 46px;
+  border-radius: 5px;
+  align-self: center;
+  margin: 20px 0;
+  background-color: dimgrey;
+  color: white;  
+}
+
+button:focus {
+  box-shadow: 0 0 0 2px rgb(61, 94, 80);
+}
+
+.btn_inactive {
+  background-color: #c7c3c3;
+  border-color: #c7c3c3
+}
+
+.bug_button_edit {
+  width: auto;
+  height: 30px;
+  margin: 0;
+}
+
+.bug_button_delete {
+  width: auto;
+  height: 30px;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.logout_button {
+  height: auto;
+  width: auto;
+}
+
+.removeunderline {
+  text-decoration: none;
+}
+
+.marginbottom {
+  margin-bottom: 40px;
+}
+
+.nobullets {
+  list-style-type: none;
+}
+
+.list_bugs_li {
+  margin-bottom: 0px;;
+}
+
+.bold-text {
+  font-weight: bold;
+}
