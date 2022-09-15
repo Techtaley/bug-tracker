@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
 import { useState } from 'react'
 //import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,59 +39,69 @@ export default function Home() {  //need to define action HERE not in handle bef
   }
     
   return (
-    <div className="mainpage">
-      
-      <Nav />  
-       
+    <>
+    <Router>
+        <div className="App">
+        <Nav />
+
         <header >          
           Bug Tracker
         </header>
-
-      {!isRegistered &&        
-        <Register />
-      }
-
-      {isRegistered && !isLoggedIn &&
-        <Login /> 
-      }      
-
-      {isRegistered && isLoggedIn &&
-        <form onSubmit={handleSubmit} className="marginbottom">
-
-          <h2>Add New Bug</h2>
-
-          <input
-            type="text"
-            name="title"s
-            placeholder="Enter New Task"
-            maxLength="15"
-            onChange={handleChange}
-            value={title}  //we need to set the value
-          />
-          <button type="submit">
-            Add
-          </button>
-        </form>  
-      }
-      
-      { isLoading ? (
-          <p>"Loading..."</p> 
-        )  : error ? (
-          <p>"Error..."</p>
-        ) : ( 
-      <div className='buglist'>
-        <h2>List of Bugs</h2>         
-          <span><b>Total Bugs:</b> {data.totalBugs} {data.status}</span>  
-
-          {/* 4) map to store to display - need map to BE */}
-          {data?.items.map(item => (  
-            <BugCard
-              key={item.id}  //helps React locate item
-              item={item}
-            />          
-          ))}
+          <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+          </Routes>
       </div>
-      )}        
-    </div>
+   </Router>
+
+{!isRegistered &&        
+  <Register />
+}
+
+{isRegistered && !isLoggedIn &&
+  <Login /> 
+}      
+
+{isRegistered && isLoggedIn &&
+  <form onSubmit={handleSubmit} className="marginbottom">
+
+    <h2>Add New Bug</h2>
+
+    <input
+      type="text"
+      name="title"s
+      placeholder="Enter New Task"
+      maxLength="15"
+      onChange={handleChange}
+      value={title}  //we need to set the value
+    />
+    <button type="submit">
+      Add
+    </button>
+  </form>  
+}
+
+{ isLoading ? (
+    <p>"Loading..."</p> 
+  )  : error ? (
+    <p>"Error..."</p>
+  ) : ( 
+<div className='buglist'>
+  <h2>List of Bugs</h2>         
+    <span><b>Total Bugs:</b> {data.totalBugs} {data.status}</span>  
+
+    {/* 4) map to store to display - need map to BE */}
+    {data?.items.map(item => (  
+      <BugCard
+        key={item.id}  //helps React locate item
+        item={item}
+      />          
+    ))}
+</div>
+)}        
+</div>    
+    </>
+
   )
 }
