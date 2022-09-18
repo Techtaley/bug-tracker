@@ -11,7 +11,7 @@ import { sendBugsAsync } from '../store/bugSlice'
 
 //'Home' is the UI for adding new bugs, completing, and deleting
 export default function Home() {  //need to define action HERE not in handle before using it
-  const { data, error, isLoading } = useGetAllBugsQuery()
+  const { error, isLoading } = useGetAllBugsQuery()
 
   const dispatch = useDispatch()
   const [title, setTitle] = useState('') //use in both input and submit
@@ -20,7 +20,6 @@ export default function Home() {  //need to define action HERE not in handle bef
   const { isLoggedIn, isRegistered }  = useSelector(state => state.users)  //looks for user in the store
   
   const bugs = useSelector(state => state.bugs)  //for sendBugsAsync
-  dispatch(sendBugsAsync(bugs))  
 
   //1) Title to state
   const handleChange = e => {    
@@ -28,8 +27,9 @@ export default function Home() {  //need to define action HERE not in handle bef
   }
 
   //2) sends new bug to STORE (temporary storage)
-  const handleSubmit = () => {  
-  
+  const handleSubmit = e => {  
+    e.preventDefault()
+
     dispatch(addBug({title})) //addBug(payload)*
     if(!title) return  //if no title returns to current state
     setTitle('')  
@@ -80,10 +80,10 @@ export default function Home() {  //need to define action HERE not in handle bef
         ) : ( 
       <div className='buglist'>
         <h2>List of Bugs</h2>         
-          <span><b>Total Bugs:</b> {data.totalBugs} {data.status}</span>  
+          <span><b>Total Bugs:</b> {bugs.totalBugs} {bugs.status}</span>  
 
           {/* 4) map to store to display - need map to BE */}
-          {data?.items.map(item => (  
+          {bugs?.items.map(item => (  
             <BugCard
               key={item.id}  //helps React locate item
               item={item}

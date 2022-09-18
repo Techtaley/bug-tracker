@@ -30,9 +30,9 @@ export const getBugsAsync = createAsyncThunk( //has 3 parameters:
 )
 
 const initialState = {//state.
-  //items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [], //id,title,completed,status
-  items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-GB')}`}], //id,title,completed
-  totalBugs: localStorage.getItem("totalBugs") ? JSON.parse(localStorage.getItem("totalBugs")) : 1,
+  items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [], //id,title,completed,status
+  //items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-GB')}`}], //id,title,completed
+  totalBugs: localStorage.getItem("totalBugs") ? JSON.parse(localStorage.getItem("totalBugs")) : 0,
   status: null, //'idle' | 'loading' | 'succeeded' | 'failed'
 }
 
@@ -62,7 +62,7 @@ const bugSlice = createSlice({
       const existingBug = state.items.find(bug => bug.id === action.payload.id)
       existingBug.completed = !existingBug.completed
       state.status = 'Bug updated'
-      existingBug.status = `Updated ${new Date().toLocaleDateString('en-GB')}`
+      existingBug.status = `Updated ${new Date().toLocaleDateString('en-US')}`
     },
     deleteBug: (state, action) => {
       const updatedCart = state.items.filter(bug => bug.id !== action.payload.id)

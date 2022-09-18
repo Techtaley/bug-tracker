@@ -24,8 +24,9 @@ yarn-error.log*
 
 /store/.env
 
-/src/pages/backup
-/src/store/backup
-/src/component/backup
-/src/backup
+src/pages/backup
+src/store/backup
+src/component/backup
+src/backup
+src/store/bug-actions.js
 
