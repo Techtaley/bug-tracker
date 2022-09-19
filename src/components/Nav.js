@@ -15,8 +15,8 @@ import { logout } from './../store/userSlice'
 import classes from './Nav.module.css'
 
 
-export default function Nav({ isLoggedIn }) {  //passing props
-    //state.reducername.propertyname - prop name from state
+export default function Nav({ isLoggedIn }) {  //passing props from userSlice
+                              //state.reducername.propertyname - prop name from state
     const isAuth = useSelector(state => state.users.isLoggedIn)  //looks for user in the store
     const dispatch = useDispatch()
 

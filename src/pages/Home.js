@@ -18,7 +18,8 @@ export default function Home() {  //need to define action HERE not in handle bef
   
                                       //state.reducername.propertyname - prop name from state
   const { isLoggedIn, isRegistered }  = useSelector(state => state.users)  //looks for user in the store
-  
+  const users = useSelector(state => state.users)  
+
   const bugs = useSelector(state => state.bugs)  //for sendBugsAsync
 
   //1) Title to state
@@ -55,13 +56,16 @@ export default function Home() {  //need to define action HERE not in handle bef
       }      
 
       {isRegistered && isLoggedIn &&
+      
         <form onSubmit={handleSubmit} className="marginbottom">
+
+        <p>{users.status}</p>
 
           <h2>Add New Bug</h2>
 
           <input
             type="text"
-            name="title"s
+            name="title"
             placeholder="Enter New Task"
             maxLength="15"
             onChange={handleChange}

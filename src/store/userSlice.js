@@ -24,25 +24,28 @@ const userSlice = createSlice({
       if(!existingUser) {
         state.values.push(newUser)
       } 
-
       
       state.isRegistered = true
-      state.status = "New user added!"
       localStorage.setItem("values", JSON.stringify(state.values))
+
+      state.status = "Thank you for registering!"
+
     },
     login(state, action){  
       const existingUser = state.values.find(user => user.username === action.payload.username && user.password === action.payload.password)
       if(existingUser) {
-        state.isLoggedIn = true      
-      } 
+        state.isLoggedIn = true 
+        state.status = `Welcome ${action.payload.username}!`
+      } else {
+        state.isLoggedIn = false
+        state.isRegistered = false
+        state.status = "Please register!"
+      }
     },
     logout(state, action){
-      state.values.push({
-        username: state.username,
-        password: state.password, 
-      })
       state.isLoggedIn = false  //false
       state.isRegistered = true
+      state.status = "You are logged off."   
     }
   }
 });
