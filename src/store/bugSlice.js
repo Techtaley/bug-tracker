@@ -45,7 +45,7 @@ const bugSlice = createSlice({
         id: uuidv4(),
         title: action.payload.title,  //state = action.payload  uses immerjs - state does not mutate
         completed: false,
-        status: `Added ${new Date().toLocaleDateString('en-GB')}`
+        status: `Added ${new Date().toLocaleDateString('en-US')}`
       }
                           //state.ARRAYNAME.find(....)  //findIndex better - more specfic
       const existingBug = state.items.find(bug => bug.id === newBug.id)   
@@ -54,7 +54,6 @@ const bugSlice = createSlice({
       }
 
       state.totalBugs++
-      //state.status = 'Loading...'  
       localStorage.setItem("items", JSON.stringify(state.items))
       localStorage.setItem("totalBugs", JSON.stringify(state.totalBugs))
     },
@@ -78,7 +77,7 @@ const bugSlice = createSlice({
       state.status = 'Loading to BE...'   
     },    
     [sendBugsAsync.fulfilled]: (state) => { 
-      state.status = 'Bug added!'   
+      state.status = 'Bugs!'   
     },        
     [sendBugsAsync.rejected]: (state) => { 
       state.status = 'Failed to load to BE'  

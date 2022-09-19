@@ -74,6 +74,8 @@ export default function Home() {  //need to define action HERE not in handle bef
           <button type="submit">
             Add
           </button>
+          <span><b>Total:</b> {bugs.totalBugs} {bugs.status}</span>  
+
         </form>  
       }
       
@@ -84,7 +86,6 @@ export default function Home() {  //need to define action HERE not in handle bef
         ) : ( 
       <div className='buglist'>
         <h2>List of Bugs</h2>         
-          <span><b>Total Bugs:</b> {bugs.totalBugs} {bugs.status}</span>  
 
           {/* 4) map to store to display - need map to BE */}
           {bugs?.items.map(item => (  
