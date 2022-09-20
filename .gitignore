@@ -26,7 +26,7 @@ yarn-error.log*
 
 src/pages/backup
 src/store/backup
-src/component/backup
+src/components/backup
 src/backup
 src/store/bug-actions.js
 
