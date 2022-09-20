@@ -18,7 +18,7 @@ export default function App() {
         <Router>  
           <Nav />        
           <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/bug-tracker" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
           </Routes>

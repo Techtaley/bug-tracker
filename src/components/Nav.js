@@ -29,7 +29,7 @@ export default function Nav({ isLoggedIn }) {  //passing props from userSlice
     
     return (
         <nav className='navbar'>
-          <HashLink activeClassName={classes.active} to='/' >home</HashLink>
+          <HashLink activeClassName={classes.active} to='/bug-tracker' >home</HashLink>
           <HashLink  activeClassName={classes.active} to='/about' >about</HashLink>
           <HashLink  activeClassName={classes.active} to='/contact' >contact</HashLink> 
             {isAuth && //if isLogged is true then show button to logout 
