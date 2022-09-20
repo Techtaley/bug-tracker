@@ -3,11 +3,14 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addBug } from './../store/bugSlice'  //import getBugsAsync instead of addBug
 import { useGetAllBugsQuery } from '../store/bugsApi'
-import Nav from '../components/Nav'
-import Register from './../components/Register'
-import Login from './../components/Login'
+//import Nav from '../components/Nav'
+import Register from '../components/Register'
+import Login from '../components/Login'
 import BugCard from './../components/BugCard'  //component
 import { sendBugsAsync } from '../store/bugSlice'
+import Header from '../components/Header'
+//import { Header } from './../components/Header'
+
 
 //'Home' is the UI for adding new bugs, completing, and deleting
 export default function Home() {  //need to define action HERE not in handle before using it
@@ -15,7 +18,6 @@ export default function Home() {  //need to define action HERE not in handle bef
 
   const dispatch = useDispatch()
   const [title, setTitle] = useState('') //use in both input and submit
-  
                                       //state.reducername.propertyname - prop name from state
   const { isLoggedIn, isRegistered }  = useSelector(state => state.users)  //looks for user in the store
   const users = useSelector(state => state.users)  
@@ -40,13 +42,8 @@ export default function Home() {  //need to define action HERE not in handle bef
     
   return (
     <div className="mainpage">
-      
-      <Nav />  
-       
-        <header >          
-          Bug Tracker
-        </header>
 
+      <Header />     
       {!isRegistered &&        
         <Register />
       }

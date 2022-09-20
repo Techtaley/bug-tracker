@@ -9,8 +9,8 @@ import { bugsApi } from './bugsApi';
 const store = configureStore({
   reducer: {
     bugs: bugReducer,
+    users: userReducer,    
    [bugsApi.reducerPath]: bugsApi.reducer,
-    users: userReducer
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(bugsApi.middleware)

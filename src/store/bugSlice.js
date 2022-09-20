@@ -30,8 +30,9 @@ export const getBugsAsync = createAsyncThunk( //has 3 parameters:
 )
 
 const initialState = {//state.
-  items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [], //id,title,completed,status
-  //items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-GB')}`}], //id,title,completed
+  //items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [], //id,title,completed,status
+  items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-US')}`}], //id,title,completed
+  //items: [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-US')}`}], //id,title,completed
   totalBugs: localStorage.getItem("totalBugs") ? JSON.parse(localStorage.getItem("totalBugs")) : 0,
   status: null, //'idle' | 'loading' | 'succeeded' | 'failed'
 }
@@ -77,7 +78,7 @@ const bugSlice = createSlice({
       state.status = 'Loading to BE...'   
     },    
     [sendBugsAsync.fulfilled]: (state) => { 
-      state.status = 'Bugs!'   
+      state.status = 'Bugs'   
     },        
     [sendBugsAsync.rejected]: (state) => { 
       state.status = 'Failed to load to BE'  

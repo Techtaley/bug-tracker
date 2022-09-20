@@ -16,13 +16,13 @@ const persistConfig = {
    storage, 
 }
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
     bugs: bugReducer,
     users: userReducer,
    [bugsApi.reducerPath]: bugsApi.reducer,
 })
 
-const persistedReducer = persistReducer(persistConfig, reducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 
 //includes api in the store to access api servicel

@@ -1,10 +1,10 @@
-import React from 'react'
+//import React from 'react'
 //import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
-import { BrowserRouter as Router } from 'react-router-dom' 
+// import { BrowserRouter as Router } from 'react-router-dom' 
 
-// import Home from  './../pages/Home'  //page
-// import About from  './../pages/About'  //page
-// import Contact from  './../pages/Contact'  //page
+// // import Home from  './../pages/Home'  //page
+// // import About from  './../pages/About'  //page
+// // import Contact from  './../pages/Contact'  //page
 
 //import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from './../store/userSlice'
 
 import classes from './Nav.module.css'
-
 
 export default function Nav({ isLoggedIn }) {  //passing props from userSlice
                               //state.reducername.propertyname - prop name from state
@@ -29,7 +28,6 @@ export default function Nav({ isLoggedIn }) {  //passing props from userSlice
       }
     
     return (
-      <Router> 
         <nav className='navbar'>
           <HashLink activeClassName={classes.active} to='/' >home</HashLink>
           <HashLink  activeClassName={classes.active} to='/about' >about</HashLink>
@@ -38,14 +36,5 @@ export default function Nav({ isLoggedIn }) {  //passing props from userSlice
               <button className="logout_button" type="button" onClick={handleLogout}>logout</button>
             }  
         </nav>        
-  
-          {/* <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-          </Routes> */}
-        </Router> 
-
-     
   )
 }
