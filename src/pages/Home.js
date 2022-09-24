@@ -11,7 +11,6 @@ import { sendBugsAsync } from '../store/bugSlice'
 import Header from '../components/Header'
 //import { Header } from './../components/Header'
 
-
 //'Home' is the UI for adding new bugs, completing, and deleting
 export default function Home() {  //need to define action HERE not in handle before using it
   const { error, isLoading } = useGetAllBugsQuery()
