@@ -7,51 +7,61 @@ import { v4 as uuidv4 } from 'uuid'
 
 const POSTURL='https://bugs-api-default-rtdb.firebaseio.com/bugs.json'
 
-//send new bugs to BE
-export const sendBugsAsync = createAsyncThunk( //has 3 parameters
-  'bugs/sendBugsAsync', //action type (slice name/name of action creator)
-  async(bugData) => {    //payload creator - it's a function that takes   
-    //try {
-      const response = await axios.put(POSTURL, bugData)
-      return response?.data
-    // } catch (error){
-    //   return error.message
-    // }
-   }
-)
-
-//gets products from DB - another option is fetchBaseURL using bugsApi 
+//gets bugs from firebase display on FE
 export const getBugsAsync = createAsyncThunk( //has 3 parameters:
   'bugs/getBugsAsync', //action type (slice name/action creator name) - getBugsAsync() = addBug() 
   async() => {    //payload creator callback - this generates 3 action types (code in extraReducers): pending, fulfilled, pending        
-        const response = await axios.get(POSTURL) //works!  //REST API - external - firebase database
-        return response?.data  //works!  creates a payload   
+    try{
+      //const response = await axios.get(`/bugs`);  //`https://jsonplaceholder.typicode.com/posts`
+      const response = await axios.get(POSTURL) //works!  //REST API - external - firebase database
+      //const data = await response.json();
+      return response?.data  //works!   
+      //console.log(response.data)
+    } catch(error){
+      return error.message
     }
+  }
 )
 
+//send update to firebase
+export const sendBugsAsync = createAsyncThunk( //has 3 parameters
+  'bugs/sendBugsAsync', //action type (slice name/name of action creator)
+  async(bugData) => {    //payload creator - it's a function that takes   
+    try {
+      const response = await axios.put(POSTURL, bugData)
+      return response?.data
+    } catch (error){
+      return error.message
+    }
+   }
+)
+
+
+
 const initialState = {//state.
-  //items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [], //id,title,completed,status
-  items: localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-US')}`}], //id,title,completed
-  //items: [{id: 111, title: "Bug 1", completed: false, status: `Added ${new Date().toLocaleDateString('en-US')}`}], //id,title,completed
+  items: [], 
   totalBugs: localStorage.getItem("totalBugs") ? JSON.parse(localStorage.getItem("totalBugs")) : 0,
-  status: null, //'idle' | 'loading' | 'succeeded' | 'failed'
+  status: null, 
+  loading: false,
+  error: null
 }
 
 const bugSlice = createSlice({
-  name: "bugs", //slice name
+  name: "bugs", 
   initialState,     
   reducers: {   
-    addBug: (state, action) => { //acm() receives action creators
-      const newBug = { //sends new bug to store with a payload 
+    addBug: (state, action) => { 
+      const newBug = {  
         id: uuidv4(),
-        title: action.payload.title,  //state = action.payload  uses immerjs - state does not mutate
+        title: action.payload.title,  
         completed: false,
-        status: `Added ${new Date().toLocaleDateString('en-US')}`
+        status: "Bug Added",
+        date: `Added ${new Date().toLocaleDateString('en-US')}`
       }
-                          //state.ARRAYNAME.find(....)  //findIndex better - more specfic
+                         
       const existingBug = state.items.find(bug => bug.id === newBug.id)   
       if (!existingBug) {
-        state.items.push(newBug) //immerjs state immutably for us
+        state.items.push(newBug) 
       }
 
       state.totalBugs++
@@ -74,16 +84,28 @@ const bugSlice = createSlice({
     },
   },//end regular reducer  
   extraReducers: {//related to state of thunk
-    [sendBugsAsync.fulfilled]: (state) => { 
-      state.status = 'Loading to BE...'   
+    [sendBugsAsync.pending]: (state) => { 
+      state.status = 'Sending...'  
     },    
-    [sendBugsAsync.fulfilled]: (state) => { 
-      state.status = 'Bugs'   
+    [sendBugsAsync.fulfilled]: (state, action) => { 
+      state.status = 'Bug sent!' 
     },        
     [sendBugsAsync.rejected]: (state) => { 
-      state.status = 'Failed to load to BE'  
+      state.status = 'Failed to send bug to DB.'  
     },
-  }   
+    [getBugsAsync.pending]: (state) => { 
+      state.loading = true
+      // state.status = 'Loading...'
+    },    
+    [getBugsAsync.fulfilled]: (state, action) => { 
+      state.loading = false
+      state = action.payload
+    },        
+    [getBugsAsync.rejected]: (state, action) => { 
+      state.loading = false
+      state.error = action.error.message
+    },    
+   }   
 });
 
 export const { addBug, completeBug, deleteBug } = bugSlice.actions

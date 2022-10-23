@@ -30,3 +30,5 @@ src/components/backup
 src/backup
 src/store/bug-actions.js
 
+src/.env
+
